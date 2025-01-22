@@ -1,87 +1,109 @@
 // frontend/app/components/Header.tsx
 
+// Header.tsx
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 
-export const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+const Header = () => {
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={cn(
-        "sticky top-0 z-50 w-full",
-        "bg-gradient-to-r from-purple-900/90 via-blue-900/90 to-cyan-900/90",
-        "backdrop-blur-lg supports-[backdrop-filter]:bg-background/60",
-        "border-b border-white/10",
-        scrolled && "shadow-lg shadow-purple-500/20"
-      )}
-    >
-      <div className="container flex h-16 items-center">
-        <div className="flex flex-1 items-center justify-between">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
-          >
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="relative">
-                <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-purple-600 to-cyan-600 opacity-75 blur"></div>
-                <span className="relative bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-2xl font-black text-transparent">
-                  SolFundMe
-                </span>
-              </div>
-            </Link>
-          </motion.div>
+    <>
+      {/* Spacer div to prevent content from going under header */}
+      <div className="h-32" />
 
-          <nav className="flex items-center space-x-8">
-            {[
-              { href: "/campaigns", label: "Campaigns" },
-              { href: "/create", label: "Create Campaign" },
-            ].map((item) => (
-              <motion.div
-                key={item.href}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+      <div
+        className="fixed top-0 w-full bg-gradient-to-r from-purple-950/95 via-blue-950/95 to-cyan-950/95 border-b border-white/10 backdrop-blur-sm z-50"
+        style={{ height: "100px" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-24">
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0 group">
+              <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent transform transition-all duration-200 group-hover:-translate-y-0.5">
+                SolFundMe
+              </h1>
+            </Link>
+
+            {/* Navigation Links */}
+            <div className="hidden md:flex items-center space-x-12">
+              <Link
+                href="/campaigns"
+                className="group relative text-gray-300 hover:text-white text-base font-medium transition-all duration-200"
               >
-                <Link
-                  href={item.href}
-                  className="relative group text-sm font-medium"
-                >
-                  <span className="text-gray-200 transition duration-300 ease-in-out group-hover:text-white">
-                    {item.label}
-                  </span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-purple-600 to-cyan-600 opacity-75 blur group-hover:opacity-100 transition duration-300"></div>
-              <div className="relative">
-                <WalletMultiButton />
+                <span className="transform transition-all duration-200 group-hover:-translate-y-0.5 inline-block">
+                  Campaigns
+                </span>
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400 transform scale-x-0 transition-transform duration-200 group-hover:scale-x-100"></span>
+              </Link>
+
+              <Link
+                href="/create"
+                className="group relative text-gray-300 hover:text-white text-base font-medium transition-all duration-200"
+              >
+                <span className="transform transition-all duration-200 group-hover:-translate-y-0.5 inline-block">
+                  Create Campaign
+                </span>
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400 transform scale-x-0 transition-transform duration-200 group-hover:scale-x-100"></span>
+              </Link>
+
+              {/* Wallet Button */}
+              <div className="group transform transition-all duration-200 hover:-translate-y-0.5">
+                <WalletMultiButton className="!bg-blue-600 hover:!bg-blue-700 !transition-colors !duration-200" />
               </div>
-            </motion.div>
-          </nav>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="md:hidden" id="mobile-menu">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <Link
+              href="/campaigns"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+            >
+              Campaigns
+            </Link>
+            <Link
+              href="/create"
+              className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+            >
+              Create Campaign
+            </Link>
+            <div className="px-3 py-2">
+              <WalletMultiButton className="!bg-blue-600 hover:!bg-blue-700 !transition-colors !duration-200" />
+            </div>
+          </div>
         </div>
       </div>
-    </motion.header>
+    </>
   );
 };
 

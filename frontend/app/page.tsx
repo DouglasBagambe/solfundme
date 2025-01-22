@@ -56,7 +56,7 @@ export default function Home() {
               className="relative min-h-[40vh] flex items-center justify-center overflow-hidden"
             >
               <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-cyan-900/20 backdrop-blur-sm" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-950/95 via-blue-950/95 to-cyan-950/95 backdrop-blur-sm" />
               </div>
 
               <div className="relative z-10 text-center space-y-8 max-w-4xl mx-auto px-4">

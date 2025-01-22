@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { RefreshCw, ArrowLeft, AlertTriangle, TagIcon } from "lucide-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 interface CampaignDetails {
   creator: string;
@@ -343,7 +342,6 @@ const CampaignDetails = () => {
         <Button variant="outline" onClick={() => router.push("/")}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Campaigns
         </Button>
-        <WalletMultiButton />
       </div>
 
       <Card className="mb-6">
