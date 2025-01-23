@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
     };
     return config;
   },
+  env: {
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXT_PUBLIC_PROJECT_ID: process.env.NEXT_PUBLIC_PROJECT_ID,
+  },
 };
 
 export default nextConfig;
